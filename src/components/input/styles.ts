@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {themas} from "../../global/themes";
+import {themas} from '../../global/themes';
 
 export const style = StyleSheet.create({
     boxInput: {
@@ -25,7 +25,7 @@ export const style = StyleSheet.create({
         color: themas.colors.gray,
         marginTop: 20
     },
-    icon: {
+    Icon: {
         width: '100%'
     },
     Button: {

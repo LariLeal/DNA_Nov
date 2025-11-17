@@ -1,5 +1,5 @@
 import {createContext, useContext} from 'react';
-import { MissingPessoa } from '../context/authContext_Desa';
+import {MissingPessoa} from '../context/authContext_desa';
 
 export interface MissignContextType {
     perfis: MissingPessoa[];

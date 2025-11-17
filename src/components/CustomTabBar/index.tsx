@@ -3,10 +3,10 @@ import {Text, TouchableOpacity, View} from 'react-native';
 import {style} from './styles';
 import {AntDesign, FontAwesome, Entypo, MaterialIcons} from '@expo/vector-icons';
 import {themas} from '../../global/themes';
-import {AuthContextDesa} from '../../context/authContext_Desa';
+import {MissingContext} from '../../context/authContext_desa';
 
 export default ({state, navigation}: any) => {
-    const {onOpen} = useContext<any>(AuthContextDesa)
+    const {onOpen} = useContext<any>(MissingContext)
 
     const go = (screenName: string) => {
         navigation.navigate(screenName)
