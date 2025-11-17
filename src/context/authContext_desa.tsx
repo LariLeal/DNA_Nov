@@ -75,7 +75,7 @@ export const MissignProvider = (props: any): any => {
 
     const Card = ({pessoa}: {pessoa: MissingPessoa}) => (
         <View style={styles.card}>
-            <Text style={StyleSheet.nome}>{pessoa.nome}</Text>
+            <Text style={styles.nome}>{pessoa.nome}</Text>
             <Text>Idade: {pessoa.idade}</Text>
             <Text>Visto pela última vez em: {pessoa.ultimaLocalizacao}</Text>
             <Text>Quando: {pessoa.ultimoDia}</Text>
@@ -90,4 +90,29 @@ export const MissignProvider = (props: any): any => {
             ))}
         </ScrollView>
     )
+
+    return (
+        <MissingContext.Provider valu={{savePerfis, deletePerfis, filter, perfis}}>
+            {props.children}
+            <ListContainer />
+        </MissingContext.Provider>
+    )
 }
+
+export const useMissing = () => useContext(MissingContext)
+
+const styles = StyleSheet.create({
+    card: {
+        width: '100%',
+        backgroundColor: '#fff',
+        padding: 15,
+        borderRadius: 12,
+        marginBottom: 15,
+        elevation: 3
+    },
+    nome: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 5
+    }
+})
