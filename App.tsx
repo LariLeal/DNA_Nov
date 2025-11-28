@@ -1,52 +1,29 @@
 import React from 'react';
-import {StatusBar, StyleSheet, useColorScheme, View, Text} from 'react-native';
-import {SafeAreaProvider, useSafeAreaInsets} from 'react-native-safe-area-context';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { MissingProvider } from './src/context/authContext_desa';
+import Login from './src/pages/login';
+import Cadastro from './src/pages/usuario'; 
+import BottomRoutes from './src/pages/routes/bottom.routes'; 
 
-const App: React.FC = () => {
-    const isDarkMode = useColorScheme() === 'dark';
+const Stack = createStackNavigator();
 
-    return (
-        <SafeAreaProvider>
-            <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-            <AppContent />
-        </SafeAreaProvider>
-    )
+export default function App() {
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <MissingProvider>
+        <NavigationContainer>
+          <Stack.Navigator 
+            initialRouteName="Login"
+            screenOptions={{ headerShown: false }}
+          >
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Cadastro" component={Cadastro} />
+            <Stack.Screen name="BottomRoutes" component={BottomRoutes} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </MissingProvider>
+    </GestureHandlerRootView>
+  );
 }
-
-const AppContent: React.FC = () => {
-    const safeAreaInsets = useSafeAreaInsets();
-
-    return (
-        <View style={[styles.container, {paddingTop: safeAreaInsets.top}]}>
-            <View style={styles.content}>
-                <Text style={styles.title}>DNA App</Text>
-                <Text style={styles.subtitle}>Seu App está funcionando!</Text>
-            </View>
-        </View>
-    )
-}
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff'
-    },
-    content: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 20
-    },
-    title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 10
-    },
-    subtitle: {
-        fontSize: 16,
-        color: '#666',
-        textAlign: 'center'
-    }
-})
-
-export default App;

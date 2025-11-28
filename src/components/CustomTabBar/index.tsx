@@ -1,51 +1,47 @@
-import React, {useContext} from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
-import {style} from './styles';
-import {AntDesign, FontAwesome, Entypo, MaterialIcons} from '@expo/vector-icons';
-import {themas} from '../../global/themes';
-import {MissingContext} from '../../context/authContext_desa';
+import React from 'react';
+import { View, TouchableOpacity, Text } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { style } from './styles';
 
-export default ({state, navigation}: any) => {
-    const {onOpen} = useContext<any>(MissingContext)
+export default function CustomTabBar({ state, navigation }: any) {
+  const tabs = [
+    { name: 'Adicionar', label: 'Adicionar', icon: '+' },
+    { name: 'Inicio', label: 'Listar', icon: '📋' },
+    { name: 'Usuario', label: 'Perfil', icon: '👤' }
+  ];
 
-    const go = (screenName: string) => {
-        navigation.navigate(screenName)
-    }
+  return (
+    <View style={style.container}>
+      {state.routes.map((route: any, index: number) => {
+        const isFocused = state.index === index;
+        const tab = tabs.find(t => t.name === route.name) || tabs[index];
 
-    return (
-        <View style={style.tabArea}>
-            <TouchableOpacity style={style.tabItem} onPress={() => go ('Desa')}>
-                <AntDesign
-                    name='bars'
-                    style={{opacity: state.index === 0 ? 1: 0.3, color: themas.colors.primary,
-                        fontSize: 32
-                    }}
-                />
-            </TouchableOpacity>
-            <TouchableOpacity style={style.tabItemButton} onPress={() => onOpen()}>
-                <View style={{width: '100%', left: 10, top: 4}}>
-                    <Entypo
-                        name='plus'
-                        size={40}
-                        color={'#fff'}
-                    />
-                </View>
-                <View style={{flexDirection: 'row-reverse', width: '100%', right: 10, bottom: 10}}>
-                    <MaterialIcons
-                        name='edit'
-                        size={30}
-                        color={'#fff'}
-                    />
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={style.tabItem} onPress={() => go ('User')}>
-                <FontAwesome
-                    name='user'
-                    style={{opacity: state.index === 1 ? 1: 0.3, color: themas.colors.primary,
-                        fontSize: 32
-                    }}
-                />
-            </TouchableOpacity>
-        </View>
-    )
+        const onPress = () => {
+          if (!isFocused) {
+            navigation.navigate(route.name);
+          }
+        };
+
+        return (
+          <TouchableOpacity
+            key={route.name}
+            style={[
+              style.tabButton,
+              isFocused && style.activeTab
+            ]}
+            onPress={onPress}
+          >
+            <Text style={[
+              style.tabIcon,
+              isFocused && style.activeIcon
+            ]}>{tab.icon}</Text>
+            <Text style={[
+              style.tabLabel,
+              isFocused && style.activeLabel
+            ]}>{tab.label}</Text>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
 }

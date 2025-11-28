@@ -1,118 +1,104 @@
 import React, {createContext, useContext, useEffect, useState} from 'react';
-import{View, Text, StyleSheet, TouchableOpacity, Dimensions, Alert, ScrollView} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-export const MissingContext: any = createContext({});
 
 export interface MissingPessoa {
     id: number;
     nome: string;
-    idade: number;
+    idade: string; // Mudei para string para compatibilidade
     ultimaLocalizacao: string;
     ultimoDia: string;
     aparencia: string; 
+    contato: string;
 }
 
-export const MissignProvider = (props: any): any => {
-    const [perfis, setPerfis] = useState<Array<MissingPessoa>>([]);
-    const [backupPerfis, setBackupPerfis] = useState<Array<MissingPessoa>>([]);
+interface MissingContextData {
+    perfis: MissingPessoa[];
+    savePerfis: (pessoa: MissingPessoa) => void;
+    deletePerfis: (id: number) => void;
+    updatePerfis: (pessoaAtualizada: MissingPessoa) => void; // NOVA FUNÇÃO
+    setPerfis: React.Dispatch<React.SetStateAction<MissingPessoa[]>>; // ADICIONADO
+}
+
+export const MissingContext = createContext<MissingContextData>({} as MissingContextData)
+
+export const MissingProvider: React.FC<{children: React.ReactNode}> = ({children}) => {
+    const [perfis, setPerfis] = useState<MissingPessoa[]>([])
 
     useEffect(() => {
-        loadPerfis();
+        loadPerfis()
     }, [])
 
     const loadPerfis = async () => {
         try {
-            const storage = await AsyncStorage.getItem("MissingPessoa");
-            const data = storage ? JSON.parse(storage) : [];
+            const storage = await AsyncStorage.getItem('MissingPessoa')
+            const data = storage ? JSON.parse(storage) : []
             setPerfis(data)
-            setBackupPerfis(data)
         } catch (err) {
-            console.log("Erro ao carregar perfis", err)
+            console.log('Erro ao carregar perfis', err)
         }
-    } 
+    }
 
     const savePerfis = async (pessoa: MissingPessoa) => {
         try {
-            let updated = [...perfis];
-            const index = updated.findIndex(p => p.id === pessoa.id);
+            let updated = [...perfis]
+            const index = updated.findIndex(p => p.id === pessoa.id)
 
             if (index >= 0) {
                 updated[index] = pessoa
             } else {
-                updated.push(pessoa)
+                // Se for um novo perfil, gera um ID único baseado no timestamp
+                const newPessoa = {
+                    ...pessoa,
+                    id: pessoa.id || Date.now()
+                }
+                updated.push(newPessoa)
             }
 
-            await AsyncStorage.setItem("missingPerfis", JSON.stringify(updated));
-            setPerfis(updated);
-            setBackupPerfis(updated)
+            await AsyncStorage.setItem('MissingPessoa', JSON.stringify(updated))
+            setPerfis(updated)
+            console.log('Perfil salvo:', pessoa)
         } catch (err) {
-            Alert.alert("Erro", "Não foi possível salvar o perfil.")
+            console.log('Erro ao salvar perfil', err)
         }
     }
 
-    const deletePerfis = async (pessoa: MissingPessoa) => {
+    // NOVA FUNÇÃO: Atualizar perfil específico
+    const updatePerfis = async (pessoaAtualizada: MissingPessoa) => {
         try {
-            const filtered = perfis.filter(p => p.id !== pessoa.id)
-            await AsyncStorage.setItem('MissingPerfis', JSON.stringify(filtered))
-            setPerfis(filtered)
-            setBackupPerfis(filtered)
+            const updated = perfis.map(pessoa => 
+                pessoa.id === pessoaAtualizada.id ? pessoaAtualizada : pessoa
+            )
+            
+            await AsyncStorage.setItem('MissingPessoa', JSON.stringify(updated))
+            setPerfis(updated)
+            console.log('Perfil atualizado:', pessoaAtualizada)
         } catch (err) {
-            console.log("Erro ao excluir", err)
+            console.log('Erro ao atualizar perfil', err)
         }
     }
 
-    const filter = (text: string) => {
-        if (!text) return setPerfis(backupPerfis);
-        const term = text.toLowerCase().trim();
-
-        const filtered = backupPerfis.filter(p =>
-            p.nome.toLowerCase().includes(term) ||
-            p.ultimaLocalizacao.toLowerCase().includes(term)
-        )
-        setPerfis(filtered)
+    const deletePerfis = async (id: number) => {
+        try {
+            const filtered = perfis.filter(p => p.id !== id)
+            await AsyncStorage.setItem('MissingPessoa', JSON.stringify(filtered))
+            setPerfis(filtered)
+            console.log('Perfil deletado:', id)
+        } catch (err) {
+            console.log('Erro ao excluir', err)
+        }
     }
-
-    const Card = ({pessoa}: {pessoa: MissingPessoa}) => (
-        <View style={styles.card}>
-            <Text style={styles.nome}>{pessoa.nome}</Text>
-            <Text>Idade: {pessoa.idade}</Text>
-            <Text>Visto pela última vez em: {pessoa.ultimaLocalizacao}</Text>
-            <Text>Quando: {pessoa.ultimoDia}</Text>
-            <Text>Como estava: {pessoa.aparencia}</Text>
-        </View>
-    )
-
-    const ListContainer = () => (
-        <ScrollView contentContainerStyle={{padding: 20}}>
-            {perfis.map((p) => (
-                <Card key={p.id} pessoa={p} />
-            ))}
-        </ScrollView>
-    )
 
     return (
-        <MissingContext.Provider valu={{savePerfis, deletePerfis, filter, perfis}}>
-            {props.children}
-            <ListContainer />
+        <MissingContext.Provider value={{
+            perfis, 
+            savePerfis, 
+            deletePerfis, 
+            updatePerfis, // ADICIONADO
+            setPerfis // ADICIONADO
+        }}>
+            {children}
         </MissingContext.Provider>
     )
 }
 
 export const useMissing = () => useContext(MissingContext)
-
-const styles = StyleSheet.create({
-    card: {
-        width: '100%',
-        backgroundColor: '#fff',
-        padding: 15,
-        borderRadius: 12,
-        marginBottom: 15,
-        elevation: 3
-    },
-    nome: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 5
-    }
-})

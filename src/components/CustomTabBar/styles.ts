@@ -1,33 +1,44 @@
-import {StyleSheet} from 'react-native';
-import {themas} from '../../global/themes';
+import { StyleSheet } from 'react-native';
+import { themas } from '../../global/themes';
 
 export const style = StyleSheet.create({
-    tabArea: {
-        flexDirection: 'row',
-        height: 80,
-        justifyContent: 'space-around',
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 3
-        },
-        shadowOpacity: 0.29,
-        shadowRadius: 4.65,
-        elevation: 7
-    },
-    tabItem: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    tabItemButton: {
-        width: 70,
-        height: 70,
-        borderRadius: 35,
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 9999,
-        top: -30,
-        backgroundColor: themas.colors.primary
-    }
-})
+  container: {
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    paddingVertical: 10,
+    borderTopWidth: 1,
+    borderTopColor: '#e0e0e0',
+    elevation: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: -2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+  },
+  tabButton: {
+    flex: 1,
+    alignItems: 'center',
+    paddingVertical: 8,
+  },
+  activeTab: {
+    backgroundColor: themas.colors.primary,
+    borderRadius: 20,
+    marginHorizontal: 5,
+  },
+  tabIcon: {
+    fontSize: 20,
+    marginBottom: 4,
+    color: '#666',
+  },
+  activeIcon: {
+    color: '#fff',
+  },
+  tabLabel: {
+    fontSize: 12,
+    fontWeight: '500',
+    color: '#666',
+  },
+  activeLabel: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+});

@@ -1,14 +1,14 @@
 import {createContext, useContext} from 'react';
-import {MissingPessoa} from '../context/authContext_desa';
+import { MissingPessoa } from '../context/authContext_desa';
 
-export interface MissignContextType {
+export interface MissingContextType {
     perfis: MissingPessoa[];
     savePerfis: (pessoa: MissingPessoa) => void;
     deletePerfis: (id: number) => void;
     filter: (text: string) => void;
 }
 
-export interface MissignPessoa {
+export interface MissingPessoa {
     id: number;
     nome: string;
     idade: number;
@@ -17,7 +17,7 @@ export interface MissignPessoa {
     aparencia: string;
 }
 
-export const MissingContext = createContext<MissignContextType>({
+export const MissingContext = createContext<MissingContextType>({
     perfis: [],
     savePerfis: () => {},
     deletePerfis: () => {},

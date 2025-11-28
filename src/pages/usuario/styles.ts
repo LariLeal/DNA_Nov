@@ -1,84 +1,549 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
+import { themas } from '../../global/themes';
 
 export const style = StyleSheet.create({
     scroll: {
         flexGrow: 1,
-        justifyContent: 'center',
+        backgroundColor: '#fff',
         paddingVertical: 30,
-        backgroundColor: '#f5f5f5'
+        paddingHorizontal: 20,
     },
-    
     container: {
+        width: '100%',
         alignItems: 'center',
-        paddingHorizontal: 20
+        paddingTop: 60
     },
-
-    profileImage: {
-        width: 120,
-        height: 120,
-        borderRadius: 60,
-        marginBottom: 15
+    boxTop: {
+        width: '100%',
+        alignItems: 'center',
+        marginBottom: 12,
+        marginTop: 40
     },
-
-    nome: {
+    title: {
         fontSize: 22,
         fontWeight: 'bold',
-        marginBottom: 20,
-        color: '#333'
+        color: themas.colors.gray,
+        textAlign: 'center',
+        marginBottom: 2,
     },
-
-    inputArea: {
+    subtitle: {
+        fontSize: 13,
+        color: themas.colors.lightGray,
+        textAlign: 'center',
+        marginBottom: 3,
+    },
+    boxMid: {
         width: '100%',
-        marginBottom: 25
+        gap: 6,
+        marginBottom: 12,
+    },
+    boxBottom: {
+        width: '100%',
+        alignItems: 'center',
+        marginTop: 8,
     },
 
-    label: {
+    // NOVOS ESTILOS ADICIONADOS
+    registerButton: {
+        backgroundColor: themas.colors.primary,
+        borderRadius: 12,
+        paddingVertical: 16,
+        paddingHorizontal: 24,
+        alignItems: 'center',
+        justifyContent: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 3,
+        minHeight: 56,
+        width: '100%',
+        marginBottom: 12,
+    },
+    registerButtonText: {
+        color: '#fff',
         fontSize: 16,
         fontWeight: '600',
-        marginBottom: 5,
-        color: '#333'
+        letterSpacing: 0.5,
+    },
+    buttonDisabled: {
+        opacity: 0.6,
+        backgroundColor: '#CCCCCC',
     },
 
-    input: {
+    backButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 12,
+        padding: 6,
+    },
+    backText: {
+        marginLeft: 6,
+        fontSize: 14,
+        color: '#555',
+        fontWeight: '600',
+    },
+    profileContainer: {
+        flex: 1,
         backgroundColor: '#fff',
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderRadius: 8,
-        padding: 10,
-        fontSize: 16,
-        marginBottom: 15
     },
-
-    textInfo: {
-        fontSize: 16,
-        backgroundColor: '#eaeaea',
-        padding: 10,
-        borderRadius: 8,
-        marginBottom: 15,
-        color: '#444'
+    profileHeader: {
+        paddingHorizontal: 24,
+        paddingTop: 60,
+        paddingBottom: 30,
+        backgroundColor: '#f8f9fa',
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.1,
+        shadowRadius: 3,
+        elevation: 3,
     },
-
-    saveButton: {
-        backgroundColor: '#4a90e2',
-        paddingVertical: 12,
-        paddingHorizontal: 25,
-        borderRadius: 10,
+    userName: {
+        fontSize: 28,
+        fontWeight: 'bold',
+        color: '#1a1a1a',
+        marginBottom: 4,
+        textAlign: 'center',
+    },
+    userEmail: {
+        fontSize: 16,
+        color: '#666',
+        fontWeight: '500',
+        textAlign: 'center',
+    },
+    sectionTitle: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#1a1a1a',
+        marginTop: 30,
         marginBottom: 20,
-        width: '100%',
-        alignItems: 'center'
+        paddingHorizontal: 24,
+        letterSpacing: 0.5,
     },
-
-    saveButtonText: {
+    infoList: {
+        paddingHorizontal: 24,
+    },
+    infoItem: {
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        marginBottom: 24,
+        paddingBottom: 20,
+        borderBottomWidth: 1,
+        borderBottomColor: '#f0f0f0',
+        paddingHorizontal: 8,
+    },
+    checkboxContainer: {
+        width: 20,
+        height: 20,
+        borderRadius: 4,
+        borderWidth: 2,
+        borderColor: '#ddd',
+        marginRight: 16,
+        marginTop: 2,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    checkboxChecked: {
+        backgroundColor: themas.colors.primary,
+        borderColor: themas.colors.primary,
+    },
+    checkboxUnchecked: {
+        backgroundColor: 'transparent',
+    },
+    checkIcon: {
         color: '#fff',
-        fontSize: 17,
-        fontWeight: '700'
+        fontSize: 12,
+        fontWeight: 'bold',
+    },
+    infoContent: {
+        flex: 1,
+        marginRight: 10,
+    },
+    infoLabel: {
+        fontSize: 12,
+        fontWeight: '700',
+        color: '#666',
+        marginBottom: 6,
+        textTransform: 'uppercase',
+        letterSpacing: 0.8,
+    },
+    infoValue: {
+        fontSize: 16,
+        color: '#1a1a1a',
+        fontWeight: '500',
+        lineHeight: 22,
+    },
+    divider: {
+        height: 1,
+        backgroundColor: '#e0e0e0',
+        marginHorizontal: 24,
+        marginVertical: 25,
+        marginBottom: 10,
+    },
+    profileActions: {
+        paddingHorizontal: 24,
+        marginTop: 10,
+        marginBottom: 40,
+        gap: 12,
+    },
+    editButton: {
+        backgroundColor: '#1a1a1a',
+        borderRadius: 12,
+        paddingVertical: 16,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 3,
+    },
+    editButtonText: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '600',
+        letterSpacing: 0.5,
+    },
+    deleteButton: {
+        backgroundColor: '#fff',
+        borderRadius: 12,
+        paddingVertical: 16,
+        alignItems: 'center',
+        borderWidth: 1.5,
+        borderColor: '#ff4444',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.1,
+        shadowRadius: 2,
+        elevation: 2,
+    },
+    deleteButtonText: {
+        color: '#ff4444',
+        fontSize: 16,
+        fontWeight: '600',
+        letterSpacing: 0.5,
+    },
+    logoutButton: {
+        backgroundColor: 'transparent',
+        borderRadius: 12,
+        paddingVertical: 16,
+        alignItems: 'center',
+        borderWidth: 1.5,
+        borderColor: '#ddd',
+        marginTop: 5,
+    },
+    logoutText: {
+        color: '#666',
+        fontSize: 16,
+        fontWeight: '600',
+        letterSpacing: 0.5,
+    },
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        padding: 20,
+    },
+    modalContent: {
+        backgroundColor: 'white',
+        borderRadius: 16,
+        padding: 24,
+        width: '100%',
+        maxWidth: 400,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 12,
+        elevation: 8,
+    },
+    modalTitle: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 20,
+        color: '#1a1a1a',
+        textAlign: 'center',
+        letterSpacing: 0.5,
+    },
+    modalInput: {
+        borderWidth: 1.5,
+        borderColor: '#e0e0e0',
+        borderRadius: 10,
+        padding: 16,
+        marginBottom: 24,
+        fontSize: 16,
+        backgroundColor: '#fafafa',
+        color: '#1a1a1a',
+    },
+    modalButtons: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        gap: 12,
+    },
+    modalButton: {
+        flex: 1,
+        paddingVertical: 14,
+        borderRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: 50,
+    },
+    cancelButton: {
+        backgroundColor: '#f8f9fa',
+        borderWidth: 1.5,
+        borderColor: '#ddd',
+    },
+    cancelButtonText: {
+        color: '#666',
+        fontWeight: '600',
+        fontSize: 16,
+        letterSpacing: 0.5,
+    },
+    confirmButton: {
+        backgroundColor: themas.colors.primary,
+        shadowColor: themas.colors.primary,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
+        elevation: 4,
+    },
+    confirmButtonText: {
+        color: '#fff',
+        fontWeight: '600',
+        fontSize: 16,
+        letterSpacing: 0.5,
+    },
+    loadingContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+    },
+    loadingText: {
+        marginTop: 12,
+        fontSize: 16,
+        color: '#666',
+        fontWeight: '500',
+    },
+    errorText: {
+        color: '#ff4444',
+        fontSize: 14,
+        fontWeight: '500',
+        textAlign: 'center',
+        marginTop: 8,
+    },
+    successText: {
+        color: '#4CAF50',
+        fontSize: 14,
+        fontWeight: '500',
+        textAlign: 'center',
+        marginTop: 8,
+    },
+    responsiveContainer: {
+        flex: 1,
+        maxWidth: 500,
+        alignSelf: 'center',
+        width: '100%',
+    },
+    focusedInput: {
+        borderColor: themas.colors.primary,
+        backgroundColor: '#fff',
+        shadowColor: themas.colors.primary,
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 2,
+    },
+    pressedButton: {
+        opacity: 0.8,
+        transform: [{ scale: 0.98 }],
     },
 
-    logoutButton: {
-        marginTop: 10,
-        padding: 10,
-        backgroundColor: '#fff',
-        borderRadius: 50,
-        elevation: 3
-    }
-})
+    switchButton: {
+        backgroundColor: themas.colors.primary,
+        paddingVertical: 12,
+        paddingHorizontal: 24,
+        borderRadius: 10,
+        alignItems: 'center',
+        marginTop: 16,
+        shadowColor: themas.colors.primary,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
+        elevation: 3,
+    },
+    switchButtonText: {
+        color: '#fff',
+        fontSize: 14,
+        fontWeight: '600',
+        letterSpacing: 0.5,
+    },
+
+    passwordInputContainer: {
+        marginBottom: 20,
+    },
+    passwordLabel: {
+        fontSize: 14,
+        fontWeight: '600',
+        marginBottom: 8,
+        color: '#1a1a1a',
+        letterSpacing: 0.5,
+    },
+    passwordInputWrapper: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderWidth: 1.5,
+        borderColor: '#e0e0e0',
+        borderRadius: 10,
+        backgroundColor: '#fafafa',
+    },
+    passwordInput: {
+        flex: 1,
+        padding: 16,
+        fontSize: 16,
+        color: '#1a1a1a',
+    },
+    eyeIcon: {
+        padding: 16,
+    },
+
+    newAccountButton: {
+        backgroundColor: '#34C759',
+        borderRadius: 12,
+        paddingVertical: 16,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 3,
+        marginBottom: 10,
+    },
+    newAccountText: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '600',
+        letterSpacing: 0.5,
+    },
+
+    editIcon: {
+        padding: 8,
+    },
+
+    statusContainer: {
+        padding: 12,
+        borderRadius: 8,
+        marginVertical: 8,
+        alignItems: 'center',
+    },
+    statusError: {
+        backgroundColor: '#ffebee',
+        borderLeftWidth: 4,
+        borderLeftColor: '#ff4444',
+    },
+    statusSuccess: {
+        backgroundColor: '#e8f5e8',
+        borderLeftWidth: 4,
+        borderLeftColor: '#4CAF50',
+    },
+
+    infoItemTouchable: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingVertical: 12,
+    },
+    infoItemContent: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+    },
+});
+
+export const inputStyles = StyleSheet.create({
+    inputContainer: {
+        marginBottom: 16,
+    },
+    inputTitle: {
+        fontSize: 12,
+        fontWeight: '700',
+        color: '#666',
+        marginBottom: 6,
+        textTransform: 'uppercase',
+        letterSpacing: 0.8,
+    },
+    inputWrapper: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderWidth: 1.5,
+        borderColor: '#e0e0e0',
+        borderRadius: 10,
+        backgroundColor: '#fafafa',
+    },
+    input: {
+        flex: 1,
+        padding: 16,
+        fontSize: 16,
+        color: '#1a1a1a',
+    },
+    iconRight: {
+        padding: 16,
+    },
+});
+
+
+export const buttonStyles = StyleSheet.create({
+    button: {
+        backgroundColor: themas.colors.primary,
+        borderRadius: 12,
+        paddingVertical: 16,
+        alignItems: 'center',
+        justifyContent: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 3,
+        minHeight: 56,
+    },
+    buttonText: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '600',
+        letterSpacing: 0.5,
+    },
+    buttonDisabled: {
+        opacity: 0.6,
+    },
+});

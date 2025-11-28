@@ -1,34 +1,37 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
-import Login from '../login';
-import BottomRoutes from './bottom.routes';
-import Cadastro from '../usuario/cadastro';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MissingProvider } from '../../context/authContext_desa';
+import CustomTabBar from '../../components/CustomTabBar';
 
-export default function Routes() {
-    const Stack = createStackNavigator()
+const AdicionarScreen = require('../adicionar/index.tsx').default;
+const InicioScreen = require('../inicio/index.tsx').default; 
+const UsuarioScreen = require('../usuario/index.tsx').default;
 
-    return (
-        <Stack.Navigator
-            initialRouteName='Login'
-            screenOptions={{
-                headerShown: false,
-                cardStyle: {
-                    backgroundColor: '#fff'
-                }
-            }}
-        >
-            <Stack.Screen
-                name='Login'
-                component={Login}
-            />
-            <Stack.Screen
-                name='Cadastro'
-                component={Cadastro}
-            />
-            <Stack.Screen
-                name='BottomRoutes'
-                component={BottomRoutes}
-            />
-        </Stack.Navigator>
-    )
+const Tab = createBottomTabNavigator();
+
+export default function BottomRoutes() {
+  return (
+    <MissingProvider>
+      <Tab.Navigator
+        screenOptions={{
+          headerShown: false
+        }}
+        tabBar={props => <CustomTabBar {...props} />}
+        initialRouteName="Inicio"
+      >
+        <Tab.Screen
+          name="Adicionar"
+          component={AdicionarScreen}
+        />
+        <Tab.Screen
+          name="Inicio" 
+          component={InicioScreen}
+        />
+        <Tab.Screen
+          name="Usuario"
+          component={UsuarioScreen}
+        />
+      </Tab.Navigator>
+    </MissingProvider>
+  );
 }
